@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-210766003-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<head>
+    <meta charset="utf-8">    
+    <title>08Tc3wBB's blog</title> 
+    <meta name="description" content="This is a blog where I post some frustrating mac problems that I have encountered in the past! I hope you can find inspiration from my blog, and I'd be delighted if my blog turns out to be useful!">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato:400,400italic,700,700italic" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="canonical" href="http://localhost:4000/">
+    <link rel="alternate" type="application/rss+xml" title="08Tc3wBB's blog Feed" href="http://localhost:4000/feed.xml">
+</head>
+<body>
+    <nav id="top" class="site-navigation">
+        <div class="inner">
+            <button id="menu-toggle" aria-expanded="false">Menu</button>
+            <div class="nav-menu">
+                <ul class="menu">
+                
+                  
+                  
+                  <li class="nav-current">
+                    <a class="nav-current" href="/">Home</a>
+                  </li>
+                
+                  
+                  
+                  <li class="">
+                    <a class="" href="/about/">About</a>
+                  </li>
+                
+                  
+                  
+                  <li class="">
+                    <a class="" href="/tags/">Archives</a>
+                  </li>
+                
+                </ul>        
+            </div><!-- .nav-menu -->
+            <a class="subscribe-button fa-feed square fill-horizontal" href="/feed.xml"><span class="screen-reader-text">Subscribe</span></a>
+        </div><!-- .inner -->
+    </nav><!-- .site-navigation -->
+    <header class="site-header">
+        <div class="inner">
+            <h1 class="site-title"><a class="logo-text" href="/">08Tc3wBB's blog</a></h1>
+            <p class="site-description">This is a blog where I post some frustrating mac problems that I have encountered in the past! I hope you can find inspiration from my blog, and I'd be delighted if my blog turns out to be useful!</p>
+        </div><!-- .inner -->
+    </header>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-210766003-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<div class="site-content">
+    <div class="inner">
+        <main class="site-main"> 
+            
+            <article class="post">
+                <header class="entry-header"> 
+                    <div class="entry-header-wrap">
+                        
+                        <a href="/2021/10/20/1/" class="post-thumbnail"><img src="/images/posts/2021-10-20_0.jpg" alt=""no mountable file systems" "></a>
+                        
+                        <h2 class="entry-title"><a href="/2021/10/20/1/" rel="bookmark" title="Permanent Link to /2021/10/20/1/">"no mountable file systems"</a></h2>
+                    </div><!-- .entry-header-wrap -->
+                    
+                    <div class="entry-meta">
+                        by <span class="post-author">08Tc3wBB</span> on <time class="published" datetime="2021-10-20">October 20, 2021</time>
+                    </div><!-- .entry-meta -->
+                    
+                </header><!-- .entry-header -->
+                <div class="entry-content">
+                    
+                        <h2>Prologue</h2>
+
+<p>Hii! Welcome to my first blog! I don’t know who is reading this, but I think you are probably a Mac user. Yay! We are all Macintosh users!</p>
+
+<p>Despite that macOS is a pretty well-made operating system, sometimes we are still facing unexpected issues. It’s pretty disrupting/frustrating cuz you knew there should be a simple solution for it, but you just can’t figure out what and how. Unfortunately, there are so many factors that can cause problems specific to your situation, and sometimes it’s difficult to find posts on the Internet describing the exact same problem as yours, maybe there is none!</p>
+
+<p>I’m currently traveling in Boise, Idaho. Inspired by the friendly environment at Boise State University, I thought about why not start a blog and share issues I’ve encountered with Mac and solutions with the internet.</p>
+
+<p>Despite that, some of the issues I had may never happen to you, but if it can inspire someone in the world to make a solution for their problems, that’s fantastic! That’s the purpose of this blog!</p>
+
+<p>Alrighty. Here we go about an issue I had recently!</p>
+
+<h2>Frustration</h2>
+
+<p>My main personal computer is a 2015 Macbook Pro. With traditional function keys and the touchpad. CLASSIC! Touch Bar was never my taste. So glad that Apple finally decided to ditch Touch Bar. [Touch Bar you will not be missed!]</p>
+
+<p>The disk of my Mac is always near full, I installed three macOSs on the partition, the one I had issue with is macOS Mojave.</p>
+
+<p>Because I like to research iOS, I sometimes need to mount multiple iOS root file system (The dmg file extracted from the firmware) on my Mac, from iOS 7 to iOS 15 beta.</p>
+
+<p>It was doing all good until one day, it suddenlty stopped working. The “no mountable file systems” window pops up when I click on the dmg file, and restarting the system does not solve the problem.</p>
+
+<blockquote>
+  <p>diskarbitrationd: Unable to mount /dev/disk5s1 (status code 0x00000049).</p>
+</blockquote>
+
+<figure class="full-width caption" align="center">
+    <img src="/images/posts/2021-10-20_1.jpg" alt="" />
+    
+    <figcaption class="caption-text">The error log I found in the console</figcaption>
+    
+</figure>
+
+<blockquote>
+  <p>This log is normally appears as &lt;private&gt;, solution is here: <br />
+<a href="https://georgegarside.com/blog/macos/sierra-console-private/">https://georgegarside.com/blog/macos/sierra-console-private/</a></p>
+</blockquote>
+
+<p>At first, I thought it was the “certificate expired” issue, but then I learned that you could skip verification when mounting using the hdiutil command</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hdiutil attach <span class="nt">-noverify</span> <span class="nt">-verbose</span> &lt;/path/to/dmg&gt;
+</code></pre></div></div>
+
+<p>However that didn’t make the problem go away. hdiutil fails too.</p>
+<blockquote>
+  <p>DIHLDiskImageAttach() returned 112 <br />
+hdiutil: attach failed - no mountable file systems</p>
+</blockquote>
+
+<figure class="full-width caption" align="center">
+    <img src="/images/posts/2021-10-20_4.png" alt="" />
+    
+    <figcaption class="caption-text">Mounting using the command line tool also fails</figcaption>
+    
+</figure>
+
+<p>You can find the corresponding driver files under /dev. It only fails when you try to mount them. Later I noticed another log from the kernel (apfs) that seemed to be relevant, I missed it earlier because it was not labeled as “errors and faults”.</p>
+
+<blockquote>
+  <p>apfs_vfsop_mount:1306: the conversion/crypto mount is already mounted for</p>
+</blockquote>
+<figure class="full-width caption" align="center">
+    <img src="/images/posts/2021-10-20_2.jpg" alt="" />
+    
+    <figcaption class="caption-text">Then I noticed another seems relevant log from kernel apfs</figcaption>
+    
+</figure>
+
+<p>By searching the string in the apfs binary file, I found this</p>
+<figure class="full-width caption" align="center">
+    <img src="/images/posts/2021-10-20_3.png" alt="" />
+    
+    <figcaption class="caption-text">Unlike the hierarchical file system (HFS), the core of APFS is still closed source</figcaption>
+    
+</figure>
+
+<p>Unlike HFS, the core of apfs is still closed source, that makes it difficult to understand what is actually happening here. But it looks like this log caused the internal apfs function to return an error code and ultimately fail the mounting process.</p>
+
+<p>I’d consider it’s a bug in apfs (Apple File System). The solution that worked for me is fairly simple, just separate the attach and mount stage. 
+Don’t do them all at once. Let apfs take a break :D</p>
+
+<h2>Solution</h2>
+
+<p>Reboot your computer if you see the “no mountable file system” prompt window. Then, after the system restarted, run the following shell commands separately to mount the target dmg file.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hdiutil attach <span class="nt">-noverify</span> <span class="nt">-nomount</span> <span class="nt">-verbose</span> &lt;/path/to/dmg&gt;  
+
+hdiutil attach <span class="nt">-noverify</span> <span class="nt">-verbose</span> &lt;/path/to/dmg&gt;
+</code></pre></div></div>
+
+<p>You can leave a comment below.</p>
+
+                    
+                    <p class="read-more"><a href="/2021/10/20/1/" class="more-link" title="read more">read more</a></p>
+                </div><!-- .entry-content -->
+                
+                <footer class="entry-footer">
+                    <div class="tag-links">
+                        Tags: <a href="/tags/index.html#mac" title="Pages tagged mac" rel="tag">mac</a><a href="/tags/index.html#diskmounting" title="Pages tagged diskmounting" rel="tag">diskmounting</a><a href="/tags/index.html#first+blog" title="Pages tagged first blog" rel="tag">first blog</a>
+                    </div>
+                </footer><!-- .entry-footer -->
+                
+            </article><!-- .post -->
+            
+            
+        </main><!-- .site-main -->
+        <aside class="sidebar">
+
+    
+    <section class="widget widget-text">
+        <h2 class="widget-title">About 08Tc3wBB</h2>
+        <p>I love digging into things: App/System/Kernel/Browser Reverse engineering; Craft exploits; Raspberry pi; 3D Printing; Many more! I wander far off, I would lodge in the wilderness.</p>
+    </section><!-- .widget-text -->
+    
+
+    
+
+    
+    <section class="widget widget-text">
+        <p><a href="https://08tc3wbb.github.io" target="_blank"><img src="/images/myavatar.png" alt="Optional Banner Ad" /></a></p>
+    </section><!-- .widget-text-->
+    
+
+    <section class="widget widget-recent-posts">
+        <h2 class="widget-title">Latest Posts</h2>
+        <ul class="recent-posts">
+            
+            <li class="recent-item"><a href="/2021/10/20/1/">"no mountable file systems"</a> <span>October 20, 2021</span></li>
+            
+        </ul><!-- .recent-posts -->
+    </section><!-- .widget-recent-posts -->
+
+    <!--Create a sorted array of tags-->
+    
+    
+    <section class="widget widget-tags">
+        <h2 class="widget-title">Tags</h2>
+        <div class="tagcloud">
+            
+            <a href="/tags/#diskmounting">diskmounting</a>
+            
+            <a href="/tags/#first+blog">first blog</a>
+            
+            <a href="/tags/#mac">mac</a>
+            
+        </div><!-- .tagcloud -->
+    </section><!-- .widget -->
+
+</aside><!-- .sidebar -->
+
+    </div><!-- .inner -->
+</div><!-- .site-content -->
+
+    <footer class="site-footer">
+    <div class="inner">
+        <div class="social-links">
+            
+            <a href="https://twitter.com/08tc3wbb" class="fa-twitter square fill-horizontal"><span class="screen-reader-text">Twitter</span></a>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <a class="fa-feed square fill-horizontal" href="/feed.xml"><span class="screen-reader-text">RSS</span></a>
+        </div><!-- .social-links -->
+        <div class="site-info">
+            &copy; <a href="/">08Tc3wBB's blog</a> all rights reserved.
+            <a href="#top" id="top-link" class="fa-chevron-up top-link square fill-horizontal"><span class="screen-reader-text">Back to the top</span></a>
+        </div><!-- .site-info -->
+    </div><!-- .inner -->
+</footer><!-- .site-footer -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/plugins.js"></script>
+    <script type="text/javascript" src="/js/custom.js"></script>
+</body>
+</html>

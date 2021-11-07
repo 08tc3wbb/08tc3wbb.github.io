@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>08Tc3wBB&apos;s blog</title>
+        <description>This is a blog where I post some frustrating mac problems that I have encountered in the past! I hope you can find inspiration from my blog, and I&apos;d be delighted if my blog turns out to be useful!</description>
+        <link>http://localhost:4000/</link>
+        <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
+        <pubDate>Sun, 07 Nov 2021 14:07:21 -0700</pubDate>
+        <lastBuildDate>Sun, 07 Nov 2021 14:07:21 -0700</lastBuildDate>
+        <generator>Jekyll v4.2.1</generator>
+        
+            <item>
+                <title>&quot;no mountable file systems&quot;</title>
+                <description>&lt;h2&gt;Prologue&lt;/h2&gt;
+
+&lt;p&gt;Hii! Welcome to my first blog! I don’t know who is reading this, but I think you are probably a Mac user. Yay! We are all Macintosh users!&lt;/p&gt;
+
+&lt;p&gt;Despite that macOS is a pretty well-made operating system, sometimes we are still facing unexpected issues. It’s pretty disrupting/frustrating cuz you knew there should be a simple solution for it, but you just can’t figure out what and how. Unfortunately, there are so many factors that can cause problems specific to your situation, and sometimes it’s difficult to find posts on the Internet describing the exact same problem as yours, maybe there is none!&lt;/p&gt;
+
+&lt;p&gt;I’m currently traveling in Boise, Idaho. Inspired by the friendly environment at Boise State University, I thought about why not start a blog and share issues I’ve encountered with Mac and solutions with the internet.&lt;/p&gt;
+
+&lt;p&gt;Despite that, some of the issues I had may never happen to you, but if it can inspire someone in the world to make a solution for their problems, that’s fantastic! That’s the purpose of this blog!&lt;/p&gt;
+
+&lt;p&gt;Alrighty. Here we go about an issue I had recently!&lt;/p&gt;
+
+&lt;h2&gt;Frustration&lt;/h2&gt;
+
+&lt;p&gt;My main personal computer is a 2015 Macbook Pro. With traditional function keys and the touchpad. CLASSIC! Touch Bar was never my taste. So glad that Apple finally decided to ditch Touch Bar. [Touch Bar you will not be missed!]&lt;/p&gt;
+
+&lt;p&gt;The disk of my Mac is always near full, I installed three macOSs on the partition, the one I had issue with is macOS Mojave.&lt;/p&gt;
+
+&lt;p&gt;Because I like to research iOS, I sometimes need to mount multiple iOS root file system (The dmg file extracted from the firmware) on my Mac, from iOS 7 to iOS 15 beta.&lt;/p&gt;
+
+&lt;p&gt;It was doing all good until one day, it suddenlty stopped working. The “no mountable file systems” window pops up when I click on the dmg file, and restarting the system does not solve the problem.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;diskarbitrationd: Unable to mount /dev/disk5s1 (status code 0x00000049).&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;figure class=&quot;full-width caption&quot; align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/images/posts/2021-10-20_1.jpg&quot; alt=&quot;&quot; /&gt;
+    
+    &lt;figcaption class=&quot;caption-text&quot;&gt;The error log I found in the console&lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;This log is normally appears as &amp;lt;private&amp;gt;, solution is here: &lt;br /&gt;
+&lt;a href=&quot;https://georgegarside.com/blog/macos/sierra-console-private/&quot;&gt;https://georgegarside.com/blog/macos/sierra-console-private/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;At first, I thought it was the “certificate expired” issue, but then I learned that you could skip verification when mounting using the hdiutil command&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;hdiutil attach &lt;span class=&quot;nt&quot;&gt;-noverify&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-verbose&lt;/span&gt; &amp;lt;/path/to/dmg&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;However that didn’t make the problem go away. hdiutil fails too.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;DIHLDiskImageAttach() returned 112 &lt;br /&gt;
+hdiutil: attach failed - no mountable file systems&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;figure class=&quot;full-width caption&quot; align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/images/posts/2021-10-20_4.png&quot; alt=&quot;&quot; /&gt;
+    
+    &lt;figcaption class=&quot;caption-text&quot;&gt;Mounting using the command line tool also fails&lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+
+&lt;p&gt;You can find the corresponding driver files under /dev. It only fails when you try to mount them. Later I noticed another log from the kernel (apfs) that seemed to be relevant, I missed it earlier because it was not labeled as “errors and faults”.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;apfs_vfsop_mount:1306: the conversion/crypto mount is already mounted for&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;full-width caption&quot; align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/images/posts/2021-10-20_2.jpg&quot; alt=&quot;&quot; /&gt;
+    
+    &lt;figcaption class=&quot;caption-text&quot;&gt;Then I noticed another seems relevant log from kernel apfs&lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+
+&lt;p&gt;By searching the string in the apfs binary file, I found this&lt;/p&gt;
+&lt;figure class=&quot;full-width caption&quot; align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/images/posts/2021-10-20_3.png&quot; alt=&quot;&quot; /&gt;
+    
+    &lt;figcaption class=&quot;caption-text&quot;&gt;Unlike the hierarchical file system (HFS), the core of APFS is still closed source&lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+
+&lt;p&gt;Unlike HFS, the core of apfs is still closed source, that makes it difficult to understand what is actually happening here. But it looks like this log caused the internal apfs function to return an error code and ultimately fail the mounting process.&lt;/p&gt;
+
+&lt;p&gt;I’d consider it’s a bug in apfs (Apple File System). The solution that worked for me is fairly simple, just separate the attach and mount stage. 
+Don’t do them all at once. Let apfs take a break :D&lt;/p&gt;
+
+&lt;h2&gt;Solution&lt;/h2&gt;
+
+&lt;p&gt;Reboot your computer if you see the “no mountable file system” prompt window. Then, after the system restarted, run the following shell commands separately to mount the target dmg file.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;hdiutil attach &lt;span class=&quot;nt&quot;&gt;-noverify&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-nomount&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-verbose&lt;/span&gt; &amp;lt;/path/to/dmg&amp;gt;  
+
+hdiutil attach &lt;span class=&quot;nt&quot;&gt;-noverify&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-verbose&lt;/span&gt; &amp;lt;/path/to/dmg&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;You can leave a comment below.&lt;/p&gt;
+</description>
+                <pubDate>Wed, 20 Oct 2021 00:00:00 -0600</pubDate>
+                <link>http://localhost:4000/2021/10/20/1/</link>
+                <guid isPermaLink="true">http://localhost:4000/2021/10/20/1/</guid>
+                
+                <category>mac</category>
+                
+                <category>diskmounting</category>
+                
+                <category>first blog</category>
+                
+                
+            </item>
+        
+    </channel>
+</rss>
